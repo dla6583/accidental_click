@@ -1,0 +1,242 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>accidental click</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <style type = "text/css">
+        *{
+            margin : 0;
+            padding : 0;
+            box-sizing: border-box;
+        }
+        h1{
+            display:inline;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        p{
+            display: inline;
+        }
+        li{
+            list-style-type: none;
+        }
+        /*****************************/
+        #name_header{
+            position:relative;
+            padding:5px;
+            font-size : 30px;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            text-align: center;
+        }
+        #top_header{
+            background-color : rgb(255, 255, 255);
+            position : sticky;
+            z-index: 2;
+            top:-1px;
+            height: 50px;
+            border-bottom: 1px solid rgb(184, 184, 184);
+        }
+        .nav{
+            position: absolute;
+            height : 100%;
+            font-size :1rem;
+            padding: 10px;
+            border: 0px;
+        }
+        .nav_left{
+            left: 10%;
+        }
+        .nav_right{
+            width : 90px;
+            right : 5%;
+            float: left;
+        }
+        .nav img{
+            width: 30px; height: 30px; padding : 5px;
+        }
+        
+        /*****************************/
+        #slideshow{
+            position: relative;
+            margin :0 auto;
+            height : 600px;
+            overflow : hidden;
+        }
+        .slides{
+            position : absolute;
+            transition : left 0.5s;
+        }
+        .slides li{
+            float :left;
+        }
+        .slides li img{
+            width: 2000px;
+            height : 600px;
+        }
+        .controller div{ 
+            background-color: rgba(255, 255, 255, 0);
+            position : absolute;
+            cursor: pointer;
+            width : 200px;
+            height: 70%;
+            display : table;
+            transition: 0.5s;
+        }
+        .controller div:hover{
+            background-color: rgba(255, 255, 255, 0.623);
+        }
+        .controller > div p {
+            display : table-cell;
+            vertical-align : middle;
+            text-align: center;
+        }
+        .prev{
+            left: 0px;
+        }
+        .next{
+            right: 0px;
+        }
+
+        /*****************************/
+
+        #card_layout{
+            position : relative;
+            top : -180px;
+            height: 500px;
+        }
+        #card_layout > div{
+            position : absolute;
+        }
+        .today_items{
+            top : 50px;
+            left: 5%;
+            width : 90%;
+            height: 400px;
+        }
+        .today_items_grid{
+            position: relative;
+            width: 33.33333%;
+            float: left;
+            height: 100%;
+        }
+        .today_items_grid img{
+            width: 300px;
+            height: 300px;
+            display: block;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .today_items_grid p{
+            text-align: center;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: block;
+            font-size: 30px;
+            margin-top: 30px;
+        }
+        .today_items_grid img:hover{
+            border: 1px solid rgb(184, 184, 184);
+        }
+        #bottom{
+            position : relative;
+            background-color: rgb(80, 80, 80);
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class = "container">
+    <div id="name_header">
+        <p>SID Laboratory</p>
+    </div>
+    <div id="top_header">
+        <div class="nav nav_left">
+            <a href="#1"><img src="search.png"></a>
+        </div>
+        <div class='nav nav_right'>
+            <a href="cartpage.html" target="_blank"><img src="shopping-cart.png"></a>
+            <a href="#3"><img src="user.png"></a>
+        </div>
+        
+    </div>
+    <div id="middle_banner">
+        <div id="slideshow">
+            <ul class ="slides">
+                <li><img id='slide_img_1' src="banner1.png"  alt=""></li>
+                <li><img src="banner2.png"  alt=""></li>
+                <li><img src="banner3.png"  alt=""></li>
+                <li><img src="banner4.png"  alt=""></li>
+            </ul>
+            <div class="controller">
+                <!-- &lang: 왼쪽 방향 화살표
+                &rang: 오른쪽 방향 화살표 -->
+                <div class="prev"><p>&lang;</p></div>
+                <div class="next"><p>&rang;</p></div>
+            </div>
+        </div>
+        <div id="card_layout">
+            <div id="todayitem", style="display: inline; left : 10%;">
+                <h1 style="font-family: 'Noto Sans KR', sans-serif;">Catagory</h1>
+            </div>
+            <div class="today_items">
+                <div class="today_items_grid">
+                    <a href="catagory.php" target="_blank"><img src="item1.png" alt="item1"></a>
+                    <p>Running</p>
+                </div>
+                <div class="today_items_grid">
+                    <img src="Canvas.webp" alt="item2">
+                    <p>Canvas</p>
+                </div>
+                <div class="today_items_grid">
+                    <img src="Sandal.webp" alt="item3">
+                    <p>Sandal</p>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div id="bottom">
+        
+    </div>
+</div>
+
+
+</body>
+    <script type = "text/javascript">
+        const slides = document.querySelector('.slides'); //전체 슬라이드 컨테이너
+        const slideImg = document.querySelectorAll('.slides li'); //모든 슬라이드들
+        let currentIdx = 0; //현재 슬라이드 index
+        const slideCount = slideImg.length; // 슬라이드 개수
+        const prev = document.querySelector('.prev'); //이전 버튼
+        const next = document.querySelector('.next'); //다음 버튼
+        const slideWidth = 2000; //한개의 슬라이드 넓이
+        const slideMargin = 0; //슬라이드간의 margin 값
+
+        //전체 슬라이드 컨테이너 넓이 설정
+        slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
+
+        function moveSlide(num) {
+            slides.style.left = -num * (slideWidth+slideMargin) + 'px';
+            currentIdx = num;
+        }
+        prev.addEventListener('click', function () {
+            if (currentIdx !== 0) moveSlide(currentIdx - 1); });
+        /*첫 번째 슬라이드로 표시 됐을때는 
+        이전 버튼 눌러도 아무런 반응 없게 하기 위해 
+        currentIdx !==0일때만 moveSlide 함수 불러옴 */
+
+        
+        next.addEventListener('click', function () {
+            if (currentIdx !== slideCount - 1) {
+            moveSlide(currentIdx + 1);
+        }})
+        /* 마지막 슬라이드로 표시 됐을때는 다음 버튼 눌러도 아무런 반응 없게 하기 위해 currentIdx !==slideCount - 1 일때만 
+        moveSlide 함수 불러옴 */
+    </script>
+</html>
+
